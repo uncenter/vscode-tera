@@ -4,4 +4,7 @@
 
 ## License
 
+> [!NOTE]
+> The grammar of this extension was partially based on https://github.com/karuna/tera-vscode.
+
 [MIT](LICENSE)
