@@ -1,0 +1,266 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Tera",
+	"patterns": [
+		{
+			"begin": "{#-?",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.comment.tera"
+				}
+			},
+			"end": "-?#}",
+			"name": "comment.block.tera"
+		},
+		{
+			"begin": "{{-?",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.tera"
+				}
+			},
+			"end": "-?}}",
+			"name": "meta.scope.tera.expression",
+			"patterns": [
+				{
+					"include": "#expression"
+				}
+			]
+		},
+		{
+			"begin": "{%-?",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.tera"
+				}
+			},
+			"end": "-?%}",
+			"name": "meta.scope.tera.tag",
+			"patterns": [
+				{
+					"match": "\\b(if|else|elif|endif|for|continue|break|endfor|block|endblock|filter|endfilter|macro|endmacro|set|set_global|include|import|extends)\\b",
+					"name": "keyword.control.tera"
+				},
+				{
+					"begin": "(?<=\\b(if|elif|for|filter|macro|set|set_global|include|import|extends)\\b)\\s+",
+					"end": "(?=-?%})",
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				},
+				{
+					"begin": "(?<=\\b(block|endblock|filter|endmacro)\\b)\\s+",
+					"end": "(?=-?%})",
+					"patterns": [
+						{
+							"include": "#identifier"
+						}
+					]
+				}
+			]
+		},
+		{
+			"begin": "({%)\\s*(raw)\\s*(%})",
+			"captures": {
+				"1": {
+					"name": "punctuation.other.tera"
+				},
+				"2": {
+					"name": "keyword.control.tera"
+				},
+				"3": {
+					"name": "punctuation.other.tera"
+				}
+			},
+			"end": "({%)\\s*(endraw)\\s*(%})",
+			"name": "comment.block.tera.raw"
+		}
+	],
+	"repository": {
+		"identifier": {
+			"patterns": [
+				{
+					"match": "\\b([a-zA-Z_][a-zA-Z0-9_]+)\\b",
+					"name": "variable.other.tera"
+				}
+			]
+		},
+		"expression": {
+			"patterns": [
+				{
+					"captures": {
+						"1": {
+							"name": "keyword.control.tera"
+						},
+						"2": {
+							"name": "keyword.control.tera"
+						},
+						"3": {
+							"name": "entity.name.function.tera"
+						}
+					},
+					"match": "\\s*\\b(is)\\s+(not\\s+)?(\\w+)\\b"
+				},
+				{
+					"match": "(\\+|\\-|\\*|/|%|~)",
+					"name": "keyword.operator.arithmetic.tera"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "keyword.operator.tera"
+						},
+						"2": {
+							"name": "support.function.builtin.tera"
+						},
+						"3": {
+							"name": "entity.name.function.tera"
+						}
+					},
+					"match": "(\\|)\\s*((lower|upper|wordcount|capitalize|replace|addslashes|slugify|title|trim|trim_start|trim_end|trim_start_matches|trim_end_matches|truncate|linebreaksbr|spaceless|indent|striptags|first|last|nth|join|length|reverse|sort|unique|slice|group_by|filter|map|concat|urlencode|urlencode_strict|abs|pluralize|round|filesizeformat|date|escape|escape_xml|safe|get|split|int|float|json_encode|as_str|default)|(\\w+))\\b"
+				},
+				{
+					"match": "\\b(loop|__tera_context)\\b",
+					"name": "variable.language.tera"
+				},
+				{
+					"include": "#identifier"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "punctuation.other.tera"
+						},
+						"2": {
+							"name": "variable.other.tera.attribute"
+						}
+					},
+					"match": "(\\.)(\\w+)"
+				},
+				{
+					"begin": "\\[",
+					"captures": {
+						"0": {
+							"name": "punctuation.other.tera"
+						}
+					},
+					"end": "\\]",
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				},
+				{
+					"begin": "\\(",
+					"captures": {
+						"0": {
+							"name": "punctuation.other.tera"
+						}
+					},
+					"end": "\\)",
+					"patterns": [
+						{
+							"include": "#expression"
+						}
+					]
+				},
+				{
+					"match": "(\\.|,|::)",
+					"name": "punctuation.other.tera"
+				},
+				{
+					"match": "(==|>=|<=|<|>|!=)",
+					"name": "keyword.operator.comparison.tera"
+				},
+				{
+					"match": "=",
+					"name": "keyword.operator.assignment.tera"
+				},
+				{
+					"name": "keyword.operator",
+					"match": "\\b(in|and|or|not|is)\\b"
+				},
+				{
+					"name": "constant.numeric",
+					"match": "[+-]?[0-9]+(\\.[0-9]+)?"
+				},
+				{
+					"name": "constant.language.boolean.tera",
+					"match": "\\b[Tt]rue|[Ff]alse\\b"
+				},
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tera"
+						}
+					},
+					"end": "\"",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tera"
+						}
+					},
+					"name": "string.quoted.double.tera",
+					"patterns": [
+						{
+							"include": "#string"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tera"
+						}
+					},
+					"end": "'",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tera"
+						}
+					},
+					"name": "string.quoted.single.tera",
+					"patterns": [
+						{
+							"include": "#string"
+						}
+					]
+				},
+				{
+					"begin": "`",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.tera"
+						}
+					},
+					"end": "`",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.tera"
+						}
+					},
+					"name": "string.quoted.other.tera",
+					"patterns": [
+						{
+							"include": "#string"
+						}
+					]
+				}
+			]
+		},
+		"string": {
+			"patterns": [
+				{
+					"match": "\\\\.",
+					"name": "constant.character.escape.tera"
+				}
+			]
+		}
+	},
+	"scopeName": "source.tera"
+}

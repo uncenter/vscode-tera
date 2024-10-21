@@ -1,0 +1,34 @@
+{
+	"name": "tera",
+	"displayName": "Tera",
+	"description": "Syntax highlighting for Tera; a powerful, easy-to-use template language inspired by Jinja2 and Django templates.",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.94.0"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"contributes": {
+		"languages": [
+			{
+				"id": "tera",
+				"aliases": [
+					"Tera",
+					"tera"
+				],
+				"extensions": [
+					".tera"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "tera",
+				"scopeName": "source.tera",
+				"path": "./syntaxes/tera.tmLanguage.json"
+			}
+		]
+	}
+}
