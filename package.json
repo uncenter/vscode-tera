@@ -1,7 +1,7 @@
 {
-	"name": "vscode-tera",
+	"name": "better-tera",
 	"publisher": "uncenter",
-	"displayName": "Tera",
+	"displayName": "Better Tera",
 	"description": "Syntax highlighting for Tera; a powerful, easy-to-use template language inspired by Jinja2 and Django templates.",
 	"version": "1.0.0",
 	"engines": {
