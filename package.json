@@ -1,5 +1,6 @@
 {
 	"name": "tera",
+	"publisher": "uncenter",
 	"displayName": "Tera",
 	"description": "Syntax highlighting for Tera; a powerful, easy-to-use template language inspired by Jinja2 and Django templates.",
 	"version": "0.0.1",
@@ -9,6 +10,10 @@
 	"categories": [
 		"Programming Languages"
 	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/uncenter/vscode-tera.git"
+	},
 	"contributes": {
 		"languages": [
 			{
@@ -30,5 +35,9 @@
 				"path": "./syntaxes/tera.tmLanguage.json"
 			}
 		]
-	}
+	},
+	"devDependencies": {
+		"@vscode/vsce": "^3.2.0"
+	},
+	"packageManager": "pnpm@9.12.2+sha512.22721b3a11f81661ae1ec68ce1a7b879425a1ca5b991c975b074ac220b187ce56c708fe5db69f4c962c989452eee76c82877f4ee80f474cebd61ee13461b6228"
 }
