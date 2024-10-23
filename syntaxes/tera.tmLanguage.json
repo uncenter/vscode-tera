@@ -1,6 +1,8 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Tera",
+	"scopeName": "source.tera",
+	"fileTypes": ["tera"],
 	"patterns": [
 		{
 			"begin": "{#-?",
@@ -305,6 +307,5 @@
 				}
 			]
 		}
-	},
-	"scopeName": "source.tera"
+	}
 }
