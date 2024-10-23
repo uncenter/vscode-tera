@@ -108,36 +108,36 @@
 					"name": "keyword.operator.arithmetic.tera"
 				},
 				{
+					"begin": "(\\|)\\s*\\b(\\w+)\\b\\(",
 					"captures": {
 						"1": {
 							"name": "keyword.operator.tera"
 						},
 						"2": {
-							"name": "support.function.builtin.tera"
-						},
-						"3": {
 							"name": "entity.name.function.tera"
 						}
 					},
-					"match": "(\\|)\\s*((lower|upper|wordcount|capitalize|replace|addslashes|slugify|title|trim|trim_start|trim_end|trim_start_matches|trim_end_matches|truncate|linebreaksbr|spaceless|indent|striptags|first|last|nth|join|length|reverse|sort|unique|slice|group_by|filter|map|concat|urlencode|urlencode_strict|abs|pluralize|round|filesizeformat|date|escape|escape_xml|safe|get|split|int|float|json_encode|as_str|default)|(\\w+))\\b"
-				},
-				{
-					"match": "\\b(loop|__tera_context)\\b",
-					"name": "variable.language.tera"
-				},
-				{
-					"include": "#identifier"
+					"end": "\\)",
+					"patterns": [
+						{
+							"include": "#arguments"
+						}
+					]
 				},
 				{
 					"captures": {
 						"1": {
-							"name": "punctuation.other.tera"
+							"name": "keyword.operator.tera"
 						},
 						"2": {
-							"name": "variable.other.tera.attribute"
+							"name": "entity.name.function.tera"
 						}
 					},
-					"match": "(\\.)(\\w+)"
+					"match": "(\\|)\\s*\\b(\\w+)\\b"
+				},
+				{
+					"match": "\\b(loop|__tera_context)\\b",
+					"name": "variable.language.tera"
 				},
 				{
 					"begin": "\\[",
@@ -150,6 +150,32 @@
 					"patterns": [
 						{
 							"include": "#expression"
+						}
+					]
+				},
+				{
+					"begin": "\\b(\\w*::)?(\\w+)\\s*\\(",
+					"beginCaptures": {
+						"1": {
+							"patterns": [
+								{
+									"match": "\\w+",
+									"name": "entity.name.namespace.tera"
+								},
+								{
+									"match": "::",
+									"name": "punctuation.separator.namespace.tera"
+								}
+							]
+						},
+						"2": {
+							"name": "entity.name.function.tera"
+						}
+					},
+					"end": "\\)",
+					"patterns": [
+						{
+							"include": "#arguments"
 						}
 					]
 				},
@@ -180,8 +206,8 @@
 					"name": "keyword.operator.assignment.tera"
 				},
 				{
-					"name": "keyword.operator",
-					"match": "\\b(in|and|or|not|is)\\b"
+					"name": "keyword.operator.logical.tera",
+					"match": "\\b(in|and|or|not|is|as)\\b"
 				},
 				{
 					"name": "constant.numeric",
@@ -190,6 +216,9 @@
 				{
 					"name": "constant.language.boolean.tera",
 					"match": "\\b[Tt]rue|[Ff]alse\\b"
+				},
+				{
+					"include": "#identifier"
 				},
 				{
 					"begin": "\"",
@@ -250,6 +279,21 @@
 							"include": "#string"
 						}
 					]
+				}
+			]
+		},
+		"arguments": {
+			"patterns": [
+				{
+					"match": "\\b(\\w+)\\s*=\\s*",
+					"captures": {
+						"1": {
+							"name": "variable.parameter.tera"
+						}
+					}
+				},
+				{
+					"include": "#expression"
 				}
 			]
 		},
