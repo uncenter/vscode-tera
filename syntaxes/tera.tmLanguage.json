@@ -5,6 +5,9 @@
 	"fileTypes": ["tera"],
 	"patterns": [
 		{
+			"include": "#frontMatter"
+		},
+		{
 			"begin": "{#-?",
 			"captures": {
 				"0": {
@@ -304,6 +307,36 @@
 				{
 					"match": "\\\\.",
 					"name": "constant.character.escape.tera"
+				}
+			]
+		},
+		"frontMatter": {
+			"applyEndPatternLast": 1,
+			"begin": "\\A(?=(-{3,}))",
+			"end": "^ {,3}\\1-*[ \\t]*$|^[ \\t]*\\.{3}$",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.end.frontmatter"
+				}
+			},
+			"patterns": [
+				{
+					"begin": "\\A(-{3,})(.*)$",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.begin.frontmatter"
+						},
+						"2": {
+							"name": "comment.frontmatter"
+						}
+					},
+					"contentName": "meta.embedded.block.frontmatter",
+					"patterns": [
+						{
+							"include": "source.yaml"
+						}
+					],
+					"while": "^(?! {,3}\\1-*[ \\t]*$|[ \\t]*\\.{3}$)"
 				}
 			]
 		}
