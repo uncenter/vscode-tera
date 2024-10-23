@@ -92,7 +92,7 @@
 				}
 			]
 		},
-		"expression": {
+		"test": {
 			"patterns": [
 				{
 					"captures": {
@@ -107,11 +107,11 @@
 						}
 					},
 					"match": "\\s*\\b(is)\\s+(not\\s+)?(\\w+)\\b"
-				},
-				{
-					"match": "(\\+|\\-|\\*|/|%|~)",
-					"name": "keyword.operator.arithmetic.tera"
-				},
+				}
+			]
+		},
+		"filter": {
+			"patterns": [
 				{
 					"begin": "(\\|)\\s*\\b(\\w+)\\b\\(",
 					"captures": {
@@ -139,25 +139,11 @@
 						}
 					},
 					"match": "(\\|)\\s*\\b(\\w+)\\b"
-				},
-				{
-					"match": "\\b(loop|__tera_context)\\b",
-					"name": "variable.language.tera"
-				},
-				{
-					"begin": "\\[",
-					"captures": {
-						"0": {
-							"name": "punctuation.other.tera"
-						}
-					},
-					"end": "\\]",
-					"patterns": [
-						{
-							"include": "#expression"
-						}
-					]
-				},
+				}
+			]
+		},
+		"function": {
+			"patterns": [
 				{
 					"begin": "\\b(\\w*::)?(\\w+)\\s*\\(",
 					"beginCaptures": {
@@ -181,6 +167,57 @@
 					"patterns": [
 						{
 							"include": "#arguments"
+						}
+					]
+				}
+			]
+		},
+		"boolean": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.tera",
+					"match": "\\b[Tt]rue|[Ff]alse\\b"
+				}
+			]
+		},
+		"number": {
+			"patterns": [
+				{
+					"name": "constant.numeric",
+					"match": "[+-]?[0-9]+(\\.[0-9]+)?"
+				}
+			]
+		},
+		"expression": {
+			"patterns": [
+				{
+					"include": "#test"
+				},
+				{
+					"match": "(\\+|\\-|\\*|/|%|~)",
+					"name": "keyword.operator.arithmetic.tera"
+				},
+				{
+					"include": "#filter"
+				},
+				{
+					"match": "\\b(loop|__tera_context)\\b",
+					"name": "variable.language.tera"
+				},
+				{
+					"include": "#function"
+				},
+				{
+					"begin": "\\[",
+					"captures": {
+						"0": {
+							"name": "punctuation.other.tera"
+						}
+					},
+					"end": "\\]",
+					"patterns": [
+						{
+							"include": "#expression"
 						}
 					]
 				},
@@ -215,12 +252,10 @@
 					"match": "\\b(in|and|or|not|is|as)\\b"
 				},
 				{
-					"name": "constant.numeric",
-					"match": "[+-]?[0-9]+(\\.[0-9]+)?"
+					"include": "#number"
 				},
 				{
-					"name": "constant.language.boolean.tera",
-					"match": "\\b[Tt]rue|[Ff]alse\\b"
+					"include": "#boolean"
 				},
 				{
 					"include": "#identifier"
