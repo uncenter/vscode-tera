@@ -3,7 +3,7 @@
 	"publisher": "uncenter",
 	"displayName": "Better Tera",
 	"description": "Syntax highlighting for Tera; a powerful, easy-to-use template language inspired by Jinja2 and Django templates.",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"engines": {
 		"vscode": "^1.94.0"
 	},
