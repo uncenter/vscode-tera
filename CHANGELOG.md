@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/uncenter/vscode-tera/compare/v1.0.1...v1.1.0) (2025-05-14)
+
+
+### Features
+
+* organize patterns, highlight parameter assignment operator, misc ([def0ccb](https://github.com/uncenter/vscode-tera/commit/def0ccb96c04d73db86ba9c02c010f44cfa7a7cf))
+
 ## [1.0.1](https://github.com/uncenter/vscode-tera/compare/v1.0.0...v1.0.1) (2024-10-23)
 
 
