@@ -134,7 +134,7 @@
 			"begin": "\\b(?:(\\w+)(::))?(\\w+)\\s*\\(",
 			"beginCaptures": {
 				"1": { "name": "entity.name.namespace.tera" },
-                "2": { "name": "punctuation.separator.namespace.tera" },
+				"2": { "name": "punctuation.separator.namespace.tera" },
 				"3": { "name": "entity.name.function.tera" }
 			},
 			"end": "\\)",
@@ -259,7 +259,7 @@
 					"match": "\\b(\\w+)\\s*(=)\\s*",
 					"captures": {
 						"1": { "name": "variable.parameter.tera" },
-                        "2": { "name": "keyword.operator.assignment.tera" }
+						"2": { "name": "keyword.operator.assignment.tera" }
 					}
 				},
 				{ "include": "#expression" }
